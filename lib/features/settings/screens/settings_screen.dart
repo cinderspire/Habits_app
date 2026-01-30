@@ -62,6 +62,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
         slivers: [
           SliverToBoxAdapter(child: _buildHeader()),
           SliverToBoxAdapter(child: _buildProfileCard(habits)),
+          SliverToBoxAdapter(child: _buildAppearanceSection()),
           SliverToBoxAdapter(child: _buildNotificationSection()),
           SliverToBoxAdapter(child: _buildDataSection()),
           SliverToBoxAdapter(child: _buildAboutSection()),
@@ -136,6 +137,25 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildAppearanceSection() {
+    final isDarkMode = ref.watch(themeModeProvider);
+    return _buildSection(
+      'Appearance',
+      Icons.palette_rounded,
+      [
+        _buildSwitchTile(
+          'Dark Mode',
+          'Switch between light and dark theme',
+          Icons.dark_mode_rounded,
+          isDarkMode,
+          (value) {
+            ref.read(themeModeProvider.notifier).setDarkMode(value);
+          },
+        ),
+      ],
     );
   }
 
@@ -485,11 +505,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
               final storage = StorageService(prefs);
               storage.clearAllData();
 
-              // Reload habits (will be empty)
-              final habits = ref.read(habitProvider);
-              for (final h in habits) {
-                ref.read(habitProvider.notifier).deleteHabit(h.id);
-              }
+              // Clear all habits at once
+              ref.read(habitProvider.notifier).clearAllHabits();
 
               Navigator.pop(ctx);
 

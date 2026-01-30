@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../../core/constants/app_constants.dart';
 import '../../../../core/models/habit.dart';
 import '../../../../core/providers/habit_provider.dart';
 import '../../../../core/theme/app_colors.dart';
@@ -372,8 +373,17 @@ class _MainScreenState extends ConsumerState<MainScreen>
     );
   }
 
+  String _getDailyQuote() {
+    final dayOfYear = DateTime.now().difference(DateTime(DateTime.now().year, 1, 1)).inDays;
+    final index = dayOfYear % AppConstants.motivationalQuotes.length;
+    return AppConstants.motivationalQuotes[index];
+  }
+
   Widget _buildHeader() {
     final hour = DateTime.now().hour;
+    final isDark = ref.watch(themeModeProvider);
+    final textColor = isDark ? AppColors.textPrimaryDark : AppColors.textPrimaryLight;
+    final subtextColor = isDark ? AppColors.textTertiaryDark : AppColors.textTertiaryLight;
     String greeting = hour < 12
         ? 'Good Morning'
         : hour < 17
@@ -392,31 +402,62 @@ class _MainScreenState extends ConsumerState<MainScreen>
           end: Alignment.bottomCenter,
         ),
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(greeting,
-                  style: AppTextStyles.bodyMedium
-                      .copyWith(color: AppColors.textTertiaryLight)),
-              const SizedBox(height: 4),
-              Text('Stay consistent!',
-                  style: AppTextStyles.headlineLarge
-                      .copyWith(color: AppColors.textPrimaryLight)),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(greeting,
+                      style: AppTextStyles.bodyMedium
+                          .copyWith(color: subtextColor)),
+                  const SizedBox(height: 4),
+                  Text('Stay consistent!',
+                      style: AppTextStyles.headlineLarge
+                          .copyWith(color: textColor)),
+                ],
+              ),
+              GestureDetector(
+                onTap: () => _onTabChanged(3),
+                child: Container(
+                  width: 48,
+                  height: 48,
+                  decoration: BoxDecoration(
+                    gradient: AppColors.primaryGradient,
+                    borderRadius: BorderRadius.circular(14),
+                  ),
+                  child: const Icon(Icons.person_rounded, color: Colors.white),
+                ),
+              ),
             ],
           ),
-          GestureDetector(
-            onTap: () => _onTabChanged(3),
-            child: Container(
-              width: 48,
-              height: 48,
-              decoration: BoxDecoration(
-                gradient: AppColors.primaryGradient,
-                borderRadius: BorderRadius.circular(14),
-              ),
-              child: const Icon(Icons.person_rounded, color: Colors.white),
+          const SizedBox(height: 12),
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            decoration: BoxDecoration(
+              color: AppColors.primaryOrange.withOpacity(0.08),
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(color: AppColors.primaryOrange.withOpacity(0.15)),
+            ),
+            child: Row(
+              children: [
+                const Icon(Icons.format_quote_rounded,
+                    color: AppColors.primaryOrange, size: 20),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: Text(
+                    _getDailyQuote(),
+                    style: AppTextStyles.bodySmall.copyWith(
+                      color: subtextColor,
+                      fontStyle: FontStyle.italic,
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
         ],

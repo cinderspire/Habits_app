@@ -37,15 +37,18 @@ void main() async {
   );
 }
 
-class HabitlyApp extends StatelessWidget {
+class HabitlyApp extends ConsumerWidget {
   final bool showOnboarding;
   const HabitlyApp({super.key, required this.showOnboarding});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final isDarkMode = ref.watch(themeModeProvider);
+
     return MaterialApp(
       title: 'Habitly',
       debugShowCheckedModeBanner: false,
+      themeMode: isDarkMode ? ThemeMode.dark : ThemeMode.light,
       theme: ThemeData(
         useMaterial3: true,
         brightness: Brightness.light,
@@ -56,6 +59,17 @@ class HabitlyApp extends StatelessWidget {
           surfaceContainerHighest: AppColors.backgroundLight,
         ),
         scaffoldBackgroundColor: AppColors.backgroundLight,
+      ),
+      darkTheme: ThemeData(
+        useMaterial3: true,
+        brightness: Brightness.dark,
+        colorScheme: const ColorScheme.dark(
+          primary: AppColors.primaryOrange,
+          secondary: AppColors.secondaryPurple,
+          surface: AppColors.backgroundDarkCard,
+          surfaceContainerHighest: AppColors.backgroundDark,
+        ),
+        scaffoldBackgroundColor: AppColors.backgroundDark,
       ),
       home: showOnboarding ? const OnboardingScreen() : const MainScreen(),
     );

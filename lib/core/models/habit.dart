@@ -5,8 +5,10 @@ class Habit {
   final String name;
   final String icon;
   final int color;
-  final String frequency; // 'daily' or 'weekly'
-  final String? reminderTime;
+  final String frequency; // 'daily', 'weekly', or 'custom'
+  final List<int> customDays; // weekday numbers 1-7 for custom frequency
+  final String? reminderTime; // HH:mm format
+  final int targetPerDay; // how many times per day (default 1)
   final List<String> completedDates; // yyyy-MM-dd format
   final DateTime createdAt;
 
@@ -26,7 +28,9 @@ class Habit {
     required this.icon,
     required this.color,
     this.frequency = 'daily',
+    List<int>? customDays,
     this.reminderTime,
+    this.targetPerDay = 1,
     List<String>? completedDates,
     DateTime? createdAt,
     this.stackGroupId,
@@ -35,6 +39,7 @@ class Habit {
     List<String>? completionTimes,
   })  : completedDates = completedDates ?? [],
         createdAt = createdAt ?? DateTime.now(),
+        customDays = customDays ?? [],
         freezeDates = freezeDates ?? [],
         completionTimes = completionTimes ?? [];
 
@@ -48,6 +53,16 @@ class Habit {
   bool get isCompletedToday => completedDates.contains(_todayString);
 
   bool get isFrozenToday => freezeDates.contains(_todayString);
+
+  /// Whether this habit should be shown today based on frequency
+  bool get isScheduledToday {
+    if (frequency == 'daily') return true;
+    if (frequency == 'weekly') return DateTime.now().weekday == 1;
+    if (frequency == 'custom' && customDays.isNotEmpty) {
+      return customDays.contains(DateTime.now().weekday);
+    }
+    return true;
+  }
 
   /// Whether a freeze was already used this week (Mon-Sun)
   bool get freezeUsedThisWeek {
@@ -122,24 +137,21 @@ class Habit {
   }
 
   /// Habit Strength: 0-100 based on consistency over last 30 days
-  /// Takes into account: recent completions (weighted), streaks, freeze usage
   double get strength {
     final now = DateTime.now();
     double score = 0.0;
     int totalWeight = 0;
 
-    // Last 30 days weighted (recent days weigh more)
     for (int i = 0; i < 30; i++) {
       final date = now.subtract(Duration(days: i));
       final dateStr = _formatDate(date);
-      // Weight: day 0 (today) = 30, day 29 = 1
       final weight = 30 - i;
       totalWeight += weight;
 
       if (completedDates.contains(dateStr)) {
         score += weight;
       } else if (freezeDates.contains(dateStr)) {
-        score += weight * 0.5; // Freeze counts as half
+        score += weight * 0.5;
       }
     }
 
@@ -184,6 +196,18 @@ class Habit {
     return 'You usually complete this around $displayHour:${minute.toString().padLeft(2, '0')} $period';
   }
 
+  /// Frequency display text
+  String get frequencyDisplayText {
+    if (frequency == 'daily') return 'Daily';
+    if (frequency == 'weekly') return 'Weekly';
+    if (frequency == 'custom' && customDays.isNotEmpty) {
+      const dayLabels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+      final labels = customDays.map((d) => dayLabels[d - 1]).toList();
+      return labels.join(', ');
+    }
+    return 'Daily';
+  }
+
   // ---------- Helpers ----------
 
   static String _formatDate(DateTime date) {
@@ -207,7 +231,9 @@ class Habit {
     String? icon,
     int? color,
     String? frequency,
+    List<int>? customDays,
     String? reminderTime,
+    int? targetPerDay,
     List<String>? completedDates,
     DateTime? createdAt,
     String? stackGroupId,
@@ -221,7 +247,9 @@ class Habit {
       icon: icon ?? this.icon,
       color: color ?? this.color,
       frequency: frequency ?? this.frequency,
+      customDays: customDays ?? List<int>.from(this.customDays),
       reminderTime: reminderTime ?? this.reminderTime,
+      targetPerDay: targetPerDay ?? this.targetPerDay,
       completedDates: completedDates ?? List<String>.from(this.completedDates),
       createdAt: createdAt ?? this.createdAt,
       stackGroupId: stackGroupId ?? this.stackGroupId,
@@ -239,7 +267,9 @@ class Habit {
       icon: icon,
       color: color,
       frequency: frequency,
+      customDays: List<int>.from(customDays),
       reminderTime: reminderTime,
+      targetPerDay: targetPerDay,
       completedDates: List<String>.from(completedDates),
       createdAt: createdAt,
       stackGroupId: null,
@@ -258,7 +288,9 @@ class Habit {
       'icon': icon,
       'color': color,
       'frequency': frequency,
+      'customDays': customDays,
       'reminderTime': reminderTime,
+      'targetPerDay': targetPerDay,
       'completedDates': completedDates,
       'createdAt': createdAt.toIso8601String(),
       'stackGroupId': stackGroupId,
@@ -275,7 +307,12 @@ class Habit {
       icon: json['icon'] as String,
       color: json['color'] as int,
       frequency: json['frequency'] as String? ?? 'daily',
+      customDays: (json['customDays'] as List<dynamic>?)
+              ?.map((e) => e as int)
+              .toList() ??
+          [],
       reminderTime: json['reminderTime'] as String?,
+      targetPerDay: json['targetPerDay'] as int? ?? 1,
       completedDates: (json['completedDates'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??

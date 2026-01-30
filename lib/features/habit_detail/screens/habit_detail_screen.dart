@@ -66,6 +66,7 @@ class _HabitDetailScreenState extends ConsumerState<HabitDetailScreen>
           slivers: [
             _buildSliverAppBar(habit, color),
             SliverToBoxAdapter(child: _buildStatsRow(habit, color)),
+            SliverToBoxAdapter(child: _build30DayHeatmap(habit, color)),
             SliverToBoxAdapter(child: _buildStrengthSection(habit, color)),
             SliverToBoxAdapter(child: _buildSmartReminderSection(habit, color)),
             SliverToBoxAdapter(child: _buildCalendarHeatmap(habit, color)),
@@ -129,7 +130,7 @@ class _HabitDetailScreenState extends ConsumerState<HabitDetailScreen>
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      habit.frequency == 'daily' ? 'Daily Habit' : 'Weekly Habit',
+                      '${habit.frequencyDisplayText} Habit',
                       style: AppTextStyles.bodyMedium.copyWith(color: Colors.white70),
                     ),
                     if (habit.stackGroupId != null) ...[
@@ -206,6 +207,146 @@ class _HabitDetailScreenState extends ConsumerState<HabitDetailScreen>
           ],
         ),
       ),
+    );
+  }
+
+  // ---------- 30-DAY HEATMAP ----------
+  Widget _build30DayHeatmap(Habit habit, Color color) {
+    final now = DateTime.now();
+    final completedSet = habit.completedDates.toSet();
+    final frozenSet = habit.freezeDates.toSet();
+
+    // Generate last 30 days
+    final days = List.generate(30, (i) => now.subtract(Duration(days: 29 - i)));
+
+    int completedCount = 0;
+    for (final day in days) {
+      final dateStr = '${day.year}-${day.month.toString().padLeft(2, '0')}-${day.day.toString().padLeft(2, '0')}';
+      if (completedSet.contains(dateStr)) completedCount++;
+    }
+
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
+      child: Container(
+        padding: const EdgeInsets.all(20),
+        decoration: BoxDecoration(
+          color: AppColors.backgroundLightCard,
+          borderRadius: BorderRadius.circular(20),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.04),
+              blurRadius: 8,
+              offset: const Offset(0, 2),
+            ),
+          ],
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text('Last 30 Days',
+                    style: AppTextStyles.headlineSmall
+                        .copyWith(color: AppColors.textPrimaryLight)),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                  decoration: BoxDecoration(
+                    color: color.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Text(
+                    '$completedCount/30',
+                    style: AppTextStyles.labelMedium.copyWith(
+                      color: color,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 16),
+            // 30-day grid: 6 columns x 5 rows
+            GridView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 10,
+                mainAxisSpacing: 4,
+                crossAxisSpacing: 4,
+              ),
+              itemCount: 30,
+              itemBuilder: (context, index) {
+                final day = days[index];
+                final dateStr =
+                    '${day.year}-${day.month.toString().padLeft(2, '0')}-${day.day.toString().padLeft(2, '0')}';
+                final isCompleted = completedSet.contains(dateStr);
+                final isFrozen = frozenSet.contains(dateStr);
+                final isToday = dateStr == Habit.todayFormatted();
+
+                Color cellColor;
+                if (isCompleted) {
+                  cellColor = color.withOpacity(0.85);
+                } else if (isFrozen) {
+                  cellColor = AppColors.streakIce.withOpacity(0.5);
+                } else {
+                  cellColor = AppColors.backgroundLightElevated;
+                }
+
+                return Tooltip(
+                  message: '${day.month}/${day.day}${isCompleted ? ' - Done' : isFrozen ? ' - Frozen' : ''}',
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: cellColor,
+                      borderRadius: BorderRadius.circular(4),
+                      border: isToday
+                          ? Border.all(color: color, width: 2)
+                          : null,
+                    ),
+                    child: isCompleted
+                        ? Center(
+                            child: Icon(Icons.check_rounded,
+                                color: Colors.white, size: 10))
+                        : null,
+                  ),
+                );
+              },
+            ),
+            const SizedBox(height: 12),
+            // Legend
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                _build30DayLegend(AppColors.backgroundLightElevated, 'Missed'),
+                const SizedBox(width: 12),
+                _build30DayLegend(color.withOpacity(0.85), 'Done'),
+                const SizedBox(width: 12),
+                _build30DayLegend(AppColors.streakIce.withOpacity(0.5), 'Frozen'),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _build30DayLegend(Color c, String label) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+          width: 12,
+          height: 12,
+          decoration: BoxDecoration(
+            color: c,
+            borderRadius: BorderRadius.circular(3),
+          ),
+        ),
+        const SizedBox(width: 4),
+        Text(label,
+            style: AppTextStyles.labelSmall
+                .copyWith(color: AppColors.textTertiaryLight, fontSize: 10)),
+      ],
     );
   }
 
@@ -951,8 +1092,12 @@ class _HabitDetailScreenState extends ConsumerState<HabitDetailScreen>
                     _editFrequencyChip('Daily', 'daily', selectedFrequency, (val) {
                       setModalState(() => selectedFrequency = val);
                     }),
-                    const SizedBox(width: 12),
+                    const SizedBox(width: 8),
                     _editFrequencyChip('Weekly', 'weekly', selectedFrequency, (val) {
+                      setModalState(() => selectedFrequency = val);
+                    }),
+                    const SizedBox(width: 8),
+                    _editFrequencyChip('Custom', 'custom', selectedFrequency, (val) {
                       setModalState(() => selectedFrequency = val);
                     }),
                   ],

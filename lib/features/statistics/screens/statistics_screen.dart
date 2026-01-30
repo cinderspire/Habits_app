@@ -120,6 +120,30 @@ class _StatisticsScreenState extends ConsumerState<StatisticsScreen>
               ),
             ],
           ),
+          const SizedBox(height: 12),
+          Row(
+            children: [
+              Expanded(
+                child: _buildOverviewTile(
+                  'Total Habits',
+                  '${habits.length}',
+                  Icons.list_alt_rounded,
+                  const Color(0xFF8B5CF6),
+                ),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: _buildOverviewTile(
+                  'Avg Strength',
+                  habits.isEmpty
+                      ? '0%'
+                      : '${(habits.fold<double>(0, (s, h) => s + h.strength) / habits.length).toInt()}%',
+                  Icons.park_rounded,
+                  const Color(0xFF10B981),
+                ),
+              ),
+            ],
+          ),
         ],
       ),
     );
@@ -265,7 +289,7 @@ class _StatisticsScreenState extends ConsumerState<StatisticsScreen>
                   maxY: 100,
                   barTouchData: BarTouchData(
                     touchTooltipData: BarTouchTooltipData(
-                      getTooltipColor: (_) => AppColors.textPrimaryLight,
+                      tooltipBgColor: AppColors.textPrimaryLight,
                       getTooltipItem: (group, groupIndex, rod, rodIndex) {
                         return BarTooltipItem(
                           '${rod.toY.toInt()}%',

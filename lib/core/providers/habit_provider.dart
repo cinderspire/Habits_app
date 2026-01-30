@@ -16,16 +16,35 @@ final habitProvider =
   return HabitNotifier(prefs);
 });
 
+// Theme mode provider
+final themeModeProvider =
+    StateNotifierProvider<ThemeModeNotifier, bool>((ref) {
+  final prefs = ref.watch(sharedPreferencesProvider);
+  return ThemeModeNotifier(prefs);
+});
+
+class ThemeModeNotifier extends StateNotifier<bool> {
+  final SharedPreferences _prefs;
+
+  ThemeModeNotifier(this._prefs) : super(false) {
+    state = _prefs.getBool('habitly_theme_mode') ?? false;
+  }
+
+  Future<void> toggle() async {
+    state = !state;
+    await _prefs.setBool('habitly_theme_mode', state);
+  }
+
+  Future<void> setDarkMode(bool value) async {
+    state = value;
+    await _prefs.setBool('habitly_theme_mode', value);
+  }
+}
+
 // Computed providers
 final todaysHabitsProvider = Provider<List<Habit>>((ref) {
   final habits = ref.watch(habitProvider);
-  final now = DateTime.now();
-  final weekday = now.weekday; // 1=Mon ... 7=Sun
-  return habits.where((h) {
-    if (h.frequency == 'daily') return true;
-    // For weekly habits, show on Mondays (or the day they were created)
-    return weekday == 1;
-  }).toList();
+  return habits.where((h) => h.isScheduledToday).toList();
 });
 
 final completedTodayCountProvider = Provider<int>((ref) {
@@ -329,6 +348,11 @@ class HabitNotifier extends StateNotifier<List<Habit>> {
       for (final h in state)
         if (h.stackGroupId == groupId) h.copyWithClearedStack() else h,
     ];
+    _saveHabits();
+  }
+
+  void clearAllHabits() {
+    state = [];
     _saveHabits();
   }
 

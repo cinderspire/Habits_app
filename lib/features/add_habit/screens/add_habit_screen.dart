@@ -20,6 +20,9 @@ class _AddHabitScreenState extends ConsumerState<AddHabitScreen> {
   String _selectedIcon = AppConstants.habitIcons[0];
   int _selectedColor = AppConstants.habitColors[0];
   String _selectedFrequency = 'daily';
+  List<int> _selectedCustomDays = [];
+  TimeOfDay? _reminderTime;
+  int _targetPerDay = 1;
 
   @override
   void dispose() {
@@ -30,12 +33,21 @@ class _AddHabitScreenState extends ConsumerState<AddHabitScreen> {
   void _saveHabit() {
     if (!_formKey.currentState!.validate()) return;
 
+    String? reminderStr;
+    if (_reminderTime != null) {
+      reminderStr =
+          '${_reminderTime!.hour.toString().padLeft(2, '0')}:${_reminderTime!.minute.toString().padLeft(2, '0')}';
+    }
+
     final habit = Habit(
       id: DateTime.now().millisecondsSinceEpoch.toString(),
       name: _nameController.text.trim(),
       icon: _selectedIcon,
       color: _selectedColor,
       frequency: _selectedFrequency,
+      customDays: _selectedFrequency == 'custom' ? _selectedCustomDays : [],
+      reminderTime: reminderStr,
+      targetPerDay: _targetPerDay,
     );
 
     ref.read(habitProvider.notifier).addHabit(habit);
@@ -50,6 +62,32 @@ class _AddHabitScreenState extends ConsumerState<AddHabitScreen> {
     });
   }
 
+  Future<void> _pickReminderTime() async {
+    final picked = await showTimePicker(
+      context: context,
+      initialTime: _reminderTime ?? const TimeOfDay(hour: 9, minute: 0),
+      builder: (context, child) {
+        return Theme(
+          data: Theme.of(context).copyWith(
+            colorScheme: const ColorScheme.light(
+              primary: AppColors.primaryOrange,
+            ),
+          ),
+          child: child!,
+        );
+      },
+    );
+    if (picked != null) {
+      setState(() => _reminderTime = picked);
+    }
+  }
+
+  String _formatTimeOfDay(TimeOfDay time) {
+    final hour = time.hourOfPeriod == 0 ? 12 : time.hourOfPeriod;
+    final period = time.period == DayPeriod.am ? 'AM' : 'PM';
+    return '$hour:${time.minute.toString().padLeft(2, '0')} $period';
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,12 +96,14 @@ class _AddHabitScreenState extends ConsumerState<AddHabitScreen> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.close_rounded, color: AppColors.textPrimaryLight),
+          icon: const Icon(Icons.close_rounded,
+              color: AppColors.textPrimaryLight),
           onPressed: () => Navigator.pop(context),
         ),
         title: Text(
           'New Habit',
-          style: AppTextStyles.headlineMedium.copyWith(color: AppColors.textPrimaryLight),
+          style: AppTextStyles.headlineMedium
+              .copyWith(color: AppColors.textPrimaryLight),
         ),
         centerTitle: true,
       ),
@@ -76,41 +116,49 @@ class _AddHabitScreenState extends ConsumerState<AddHabitScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Suggested habits
-              Text('Quick Start', style: AppTextStyles.titleMedium.copyWith(color: AppColors.textSecondaryLight)),
+              Text('Quick Start',
+                  style: AppTextStyles.titleMedium
+                      .copyWith(color: AppColors.textSecondaryLight)),
               const SizedBox(height: 12),
               _buildSuggestedHabits(),
               const SizedBox(height: 28),
 
               // Name input
-              Text('Habit Name', style: AppTextStyles.titleMedium.copyWith(color: AppColors.textSecondaryLight)),
+              Text('Habit Name',
+                  style: AppTextStyles.titleMedium
+                      .copyWith(color: AppColors.textSecondaryLight)),
               const SizedBox(height: 8),
               TextFormField(
                 controller: _nameController,
                 maxLength: AppConstants.maxHabitNameLength,
-                style: AppTextStyles.bodyLarge.copyWith(color: AppColors.textPrimaryLight),
+                style: AppTextStyles.bodyLarge
+                    .copyWith(color: AppColors.textPrimaryLight),
                 decoration: InputDecoration(
                   hintText: 'e.g. Morning Meditation',
-                  hintStyle: AppTextStyles.bodyLarge.copyWith(color: AppColors.textTertiaryLight),
+                  hintStyle: AppTextStyles.bodyLarge
+                      .copyWith(color: AppColors.textTertiaryLight),
                   filled: true,
                   fillColor: AppColors.backgroundLightCard,
                   counterText: '',
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(14),
-                    borderSide: BorderSide(color: AppColors.glassBorder),
+                    borderSide: const BorderSide(color: AppColors.glassBorder),
                   ),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(14),
-                    borderSide: BorderSide(color: AppColors.glassBorder),
+                    borderSide: const BorderSide(color: AppColors.glassBorder),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(14),
-                    borderSide: const BorderSide(color: AppColors.primaryOrange, width: 2),
+                    borderSide: const BorderSide(
+                        color: AppColors.primaryOrange, width: 2),
                   ),
                   errorBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(14),
                     borderSide: const BorderSide(color: AppColors.error),
                   ),
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                  contentPadding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                 ),
                 validator: (value) {
                   if (value == null || value.trim().isEmpty) {
@@ -122,21 +170,49 @@ class _AddHabitScreenState extends ConsumerState<AddHabitScreen> {
               const SizedBox(height: 24),
 
               // Icon picker
-              Text('Icon', style: AppTextStyles.titleMedium.copyWith(color: AppColors.textSecondaryLight)),
+              Text('Icon',
+                  style: AppTextStyles.titleMedium
+                      .copyWith(color: AppColors.textSecondaryLight)),
               const SizedBox(height: 12),
               _buildIconPicker(),
               const SizedBox(height: 24),
 
               // Color picker
-              Text('Color', style: AppTextStyles.titleMedium.copyWith(color: AppColors.textSecondaryLight)),
+              Text('Color',
+                  style: AppTextStyles.titleMedium
+                      .copyWith(color: AppColors.textSecondaryLight)),
               const SizedBox(height: 12),
               _buildColorPicker(),
               const SizedBox(height: 24),
 
               // Frequency selector
-              Text('Frequency', style: AppTextStyles.titleMedium.copyWith(color: AppColors.textSecondaryLight)),
+              Text('Frequency',
+                  style: AppTextStyles.titleMedium
+                      .copyWith(color: AppColors.textSecondaryLight)),
               const SizedBox(height: 12),
               _buildFrequencySelector(),
+
+              // Custom days picker
+              if (_selectedFrequency == 'custom') ...[
+                const SizedBox(height: 16),
+                _buildCustomDaysPicker(),
+              ],
+              const SizedBox(height: 24),
+
+              // Target per day
+              Text('Target Per Day',
+                  style: AppTextStyles.titleMedium
+                      .copyWith(color: AppColors.textSecondaryLight)),
+              const SizedBox(height: 12),
+              _buildTargetSelector(),
+              const SizedBox(height: 24),
+
+              // Reminder time
+              Text('Reminder (Optional)',
+                  style: AppTextStyles.titleMedium
+                      .copyWith(color: AppColors.textSecondaryLight)),
+              const SizedBox(height: 12),
+              _buildReminderPicker(),
               const SizedBox(height: 36),
 
               // Save button
@@ -159,7 +235,8 @@ class _AddHabitScreenState extends ConsumerState<AddHabitScreen> {
                   child: Center(
                     child: Text(
                       'Create Habit',
-                      style: AppTextStyles.titleMedium.copyWith(color: Colors.white),
+                      style: AppTextStyles.titleMedium
+                          .copyWith(color: Colors.white),
                     ),
                   ),
                 ),
@@ -188,18 +265,23 @@ class _AddHabitScreenState extends ConsumerState<AddHabitScreen> {
                   : AppColors.backgroundLightCard,
               borderRadius: BorderRadius.circular(12),
               border: Border.all(
-                color: isSelected ? Color(s['color'] as int) : AppColors.glassBorder,
+                color: isSelected
+                    ? Color(s['color'] as int)
+                    : AppColors.glassBorder,
               ),
             ),
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text(s['icon'] as String, style: const TextStyle(fontSize: 18)),
+                Text(s['icon'] as String,
+                    style: const TextStyle(fontSize: 18)),
                 const SizedBox(width: 6),
                 Text(
                   s['name'] as String,
                   style: AppTextStyles.labelMedium.copyWith(
-                    color: isSelected ? Color(s['color'] as int) : AppColors.textSecondaryLight,
+                    color: isSelected
+                        ? Color(s['color'] as int)
+                        : AppColors.textSecondaryLight,
                   ),
                 ),
               ],
@@ -239,7 +321,8 @@ class _AddHabitScreenState extends ConsumerState<AddHabitScreen> {
                     : AppColors.backgroundLightElevated,
                 borderRadius: BorderRadius.circular(10),
                 border: Border.all(
-                  color: isSelected ? Color(_selectedColor) : Colors.transparent,
+                  color:
+                      isSelected ? Color(_selectedColor) : Colors.transparent,
                   width: 2,
                 ),
               ),
@@ -268,7 +351,8 @@ class _AddHabitScreenState extends ConsumerState<AddHabitScreen> {
               color: Color(colorValue),
               shape: BoxShape.circle,
               border: Border.all(
-                color: isSelected ? AppColors.textPrimaryLight : Colors.transparent,
+                color:
+                    isSelected ? AppColors.textPrimaryLight : Colors.transparent,
                 width: 3,
               ),
               boxShadow: isSelected
@@ -282,7 +366,8 @@ class _AddHabitScreenState extends ConsumerState<AddHabitScreen> {
                   : [],
             ),
             child: isSelected
-                ? const Icon(Icons.check_rounded, color: Colors.white, size: 20)
+                ? const Icon(Icons.check_rounded,
+                    color: Colors.white, size: 20)
                 : null,
           ),
         );
@@ -296,6 +381,8 @@ class _AddHabitScreenState extends ConsumerState<AddHabitScreen> {
         _buildFrequencyChip('Daily', 'daily'),
         const SizedBox(width: 12),
         _buildFrequencyChip('Weekly', 'weekly'),
+        const SizedBox(width: 12),
+        _buildFrequencyChip('Custom', 'custom'),
       ],
     );
   }
@@ -313,7 +400,8 @@ class _AddHabitScreenState extends ConsumerState<AddHabitScreen> {
                 : AppColors.backgroundLightCard,
             borderRadius: BorderRadius.circular(14),
             border: Border.all(
-              color: isSelected ? AppColors.primaryOrange : AppColors.glassBorder,
+              color:
+                  isSelected ? AppColors.primaryOrange : AppColors.glassBorder,
               width: isSelected ? 2 : 1,
             ),
           ),
@@ -321,10 +409,200 @@ class _AddHabitScreenState extends ConsumerState<AddHabitScreen> {
             child: Text(
               label,
               style: AppTextStyles.titleMedium.copyWith(
-                color: isSelected ? AppColors.primaryOrange : AppColors.textSecondaryLight,
+                color: isSelected
+                    ? AppColors.primaryOrange
+                    : AppColors.textSecondaryLight,
               ),
             ),
           ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildCustomDaysPicker() {
+    const dayLabels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+    return Container(
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: AppColors.backgroundLightCard,
+        borderRadius: BorderRadius.circular(14),
+        border: Border.all(color: AppColors.glassBorder),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: List.generate(7, (index) {
+          final dayNum = index + 1; // 1=Mon, 7=Sun
+          final isSelected = _selectedCustomDays.contains(dayNum);
+          return GestureDetector(
+            onTap: () {
+              setState(() {
+                if (isSelected) {
+                  _selectedCustomDays.remove(dayNum);
+                } else {
+                  _selectedCustomDays.add(dayNum);
+                }
+              });
+            },
+            child: Container(
+              width: 40,
+              height: 40,
+              decoration: BoxDecoration(
+                color: isSelected
+                    ? AppColors.primaryOrange
+                    : AppColors.backgroundLightElevated,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Center(
+                child: Text(
+                  dayLabels[index],
+                  style: AppTextStyles.labelSmall.copyWith(
+                    color: isSelected
+                        ? Colors.white
+                        : AppColors.textSecondaryLight,
+                    fontWeight:
+                        isSelected ? FontWeight.bold : FontWeight.normal,
+                  ),
+                ),
+              ),
+            ),
+          );
+        }),
+      ),
+    );
+  }
+
+  Widget _buildTargetSelector() {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      decoration: BoxDecoration(
+        color: AppColors.backgroundLightCard,
+        borderRadius: BorderRadius.circular(14),
+        border: Border.all(color: AppColors.glassBorder),
+      ),
+      child: Row(
+        children: [
+          Icon(Icons.repeat_rounded,
+              color: AppColors.textTertiaryLight, size: 22),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Text(
+              'Times per day',
+              style: AppTextStyles.bodyMedium
+                  .copyWith(color: AppColors.textPrimaryLight),
+            ),
+          ),
+          GestureDetector(
+            onTap: () {
+              if (_targetPerDay > 1) {
+                setState(() => _targetPerDay--);
+              }
+            },
+            child: Container(
+              width: 36,
+              height: 36,
+              decoration: BoxDecoration(
+                color: AppColors.backgroundLightElevated,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: const Icon(Icons.remove_rounded,
+                  color: AppColors.textSecondaryLight, size: 20),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Text(
+              '$_targetPerDay',
+              style: AppTextStyles.headlineSmall.copyWith(
+                color: AppColors.primaryOrange,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          GestureDetector(
+            onTap: () {
+              if (_targetPerDay < 10) {
+                setState(() => _targetPerDay++);
+              }
+            },
+            child: Container(
+              width: 36,
+              height: 36,
+              decoration: BoxDecoration(
+                color: AppColors.primaryOrange.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: const Icon(Icons.add_rounded,
+                  color: AppColors.primaryOrange, size: 20),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildReminderPicker() {
+    return GestureDetector(
+      onTap: _pickReminderTime,
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+        decoration: BoxDecoration(
+          color: AppColors.backgroundLightCard,
+          borderRadius: BorderRadius.circular(14),
+          border: Border.all(color: AppColors.glassBorder),
+        ),
+        child: Row(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: _reminderTime != null
+                    ? AppColors.primaryOrange.withOpacity(0.1)
+                    : AppColors.backgroundLightElevated,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Icon(
+                Icons.alarm_rounded,
+                color: _reminderTime != null
+                    ? AppColors.primaryOrange
+                    : AppColors.textTertiaryLight,
+                size: 22,
+              ),
+            ),
+            const SizedBox(width: 14),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    _reminderTime != null
+                        ? 'Reminder at ${_formatTimeOfDay(_reminderTime!)}'
+                        : 'Set a reminder time',
+                    style: AppTextStyles.titleSmall.copyWith(
+                      color: _reminderTime != null
+                          ? AppColors.textPrimaryLight
+                          : AppColors.textTertiaryLight,
+                    ),
+                  ),
+                  if (_reminderTime == null)
+                    Text(
+                      'Tap to add a daily reminder',
+                      style: AppTextStyles.bodySmall
+                          .copyWith(color: AppColors.textTertiaryLight),
+                    ),
+                ],
+              ),
+            ),
+            if (_reminderTime != null)
+              GestureDetector(
+                onTap: () => setState(() => _reminderTime = null),
+                child: const Icon(Icons.close_rounded,
+                    color: AppColors.textTertiaryLight, size: 20),
+              )
+            else
+              const Icon(Icons.chevron_right_rounded,
+                  color: AppColors.textTertiaryLight, size: 22),
+          ],
         ),
       ),
     );

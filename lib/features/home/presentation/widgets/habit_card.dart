@@ -149,7 +149,7 @@ class HabitCard extends StatelessWidget {
                           ),
                           const SizedBox(width: 4),
                           Text(
-                            habit.frequency == 'daily' ? 'Daily' : 'Weekly',
+                            habit.frequencyDisplayText,
                             style: AppTextStyles.bodySmall.copyWith(
                               color: AppColors.textTertiaryLight,
                             ),
