@@ -2,7 +2,7 @@
 
 ## Project Title
 
-**Habitly — Beautiful Habit Tracking That Grows With You**
+**Habitly — Built Different. Daily.**
 
 ## Tagline
 
