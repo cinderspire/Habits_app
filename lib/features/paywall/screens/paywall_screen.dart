@@ -83,7 +83,7 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
             SnackBar(
               content: Text('No previous purchases found',
                   style: AppTextStyles.bodySmall.copyWith(color: Colors.white)),
-              backgroundColor: Theme.of(context).colorScheme.onSurface.withOpacity(0.5),
+              backgroundColor: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.5),
             ),
           );
         }
@@ -107,8 +107,8 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
                 alignment: Alignment.topRight,
                 child: IconButton(
                   onPressed: () => Navigator.pop(context),
-                  icon: const Icon(Icons.close_rounded,
-                      color: Theme.of(context).colorScheme.onSurface.withOpacity(0.5)),
+                  icon: Icon(Icons.close_rounded,
+                      color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.5)),
                 ),
               ),
 
@@ -121,7 +121,7 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
                   shape: BoxShape.circle,
                   boxShadow: [
                     BoxShadow(
-                      color: AppColors.primaryOrange.withOpacity(0.3),
+                      color: AppColors.primaryOrange.withValues(alpha: 0.3),
                       blurRadius: 20,
                       offset: const Offset(0, 8),
                     ),
@@ -185,14 +185,14 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
                         ? null
                         : AppColors.primaryGradient,
                     color: _purchasing
-                        ? Theme.of(context).colorScheme.onSurface.withOpacity(0.5)
+                        ? Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.5)
                         : null,
                     borderRadius: BorderRadius.circular(16),
                     boxShadow: _purchasing
                         ? []
                         : [
                             BoxShadow(
-                              color: AppColors.primaryOrange.withOpacity(0.3),
+                              color: AppColors.primaryOrange.withValues(alpha: 0.3),
                               blurRadius: 12,
                               offset: const Offset(0, 6),
                             ),
@@ -234,7 +234,7 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
               Text(
                 'Cancel anytime. Subscription auto-renews.',
                 style: AppTextStyles.bodySmall
-                    .copyWith(color: Theme.of(context).colorScheme.onSurface.withOpacity(0.5), fontSize: 10),
+                    .copyWith(color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.5), fontSize: 10),
                 textAlign: TextAlign.center,
               ),
             ],
@@ -252,7 +252,7 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
           Container(
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
-              color: AppColors.primaryOrange.withOpacity(0.1),
+              color: AppColors.primaryOrange.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(12),
             ),
             child: Icon(icon, color: AppColors.primaryOrange, size: 22),
@@ -267,7 +267,7 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
                         .copyWith(color: Theme.of(context).colorScheme.onSurface)),
                 Text(subtitle,
                     style: AppTextStyles.bodySmall
-                        .copyWith(color: Theme.of(context).colorScheme.onSurface.withOpacity(0.5))),
+                        .copyWith(color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.5))),
               ],
             ),
           ),
@@ -340,7 +340,7 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           color: isSelected
-              ? AppColors.primaryOrange.withOpacity(0.08)
+              ? AppColors.primaryOrange.withValues(alpha: 0.08)
               : AppColors.backgroundLightCard,
           borderRadius: BorderRadius.circular(16),
           border: Border.all(
@@ -360,7 +360,7 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
                 border: Border.all(
                   color: isSelected
                       ? AppColors.primaryOrange
-                      : Theme.of(context).colorScheme.onSurface.withOpacity(0.5),
+                      : Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.5),
                   width: 2,
                 ),
                 color: isSelected
@@ -399,7 +399,7 @@ class _PaywallScreenState extends ConsumerState<PaywallScreen> {
                   ),
                   Text(subtitle,
                       style: AppTextStyles.bodySmall
-                          .copyWith(color: Theme.of(context).colorScheme.onSurface.withOpacity(0.5))),
+                          .copyWith(color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.5))),
                 ],
               ),
             ),

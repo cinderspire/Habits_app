@@ -163,8 +163,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  AppColors.primaryOrange.withOpacity(0.15),
-                  AppColors.primaryYellow.withOpacity(0.15),
+                  AppColors.primaryOrange.withValues(alpha: 0.15),
+                  AppColors.primaryYellow.withValues(alpha: 0.15),
                 ],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,

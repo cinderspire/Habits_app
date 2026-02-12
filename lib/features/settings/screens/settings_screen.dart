@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import '../../../core/constants/app_constants.dart';
 import '../../../core/models/habit.dart';
 import '../../../core/providers/habit_provider.dart';
@@ -102,7 +101,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
           borderRadius: BorderRadius.circular(24),
           boxShadow: [
             BoxShadow(
-              color: AppColors.primaryOrange.withOpacity(0.3),
+              color: AppColors.primaryOrange.withValues(alpha: 0.3),
               blurRadius: 16,
               offset: const Offset(0, 8),
             ),
@@ -114,7 +113,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
               width: 60,
               height: 60,
               decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.2),
+                color: Colors.white.withValues(alpha: 0.2),
                 shape: BoxShape.circle,
               ),
               child: const Icon(Icons.person_rounded, color: Colors.white, size: 32),
@@ -310,7 +309,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
               borderRadius: BorderRadius.circular(20),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.04),
+                  color: Colors.black.withValues(alpha: 0.04),
                   blurRadius: 10,
                   offset: const Offset(0, 4),
                 ),
@@ -337,7 +336,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
           Container(
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
-              color: AppColors.primaryOrange.withOpacity(0.1),
+              color: AppColors.primaryOrange.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(12),
             ),
             child: Icon(icon, color: AppColors.primaryOrange, size: 22),
@@ -360,7 +359,8 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
           Switch.adaptive(
             value: value,
             onChanged: onChanged,
-            activeColor: AppColors.primaryOrange,
+            activeTrackColor: AppColors.primaryOrange.withValues(alpha: 0.5),
+            activeThumbColor: AppColors.primaryOrange,
           ),
         ],
       ),
@@ -385,7 +385,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
             Container(
               padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
-                color: color.withOpacity(0.1),
+                color: color.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Icon(icon, color: color, size: 22),
@@ -410,7 +410,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
             Icon(Icons.chevron_right_rounded,
                 color: onTap != null
                     ? AppColors.textTertiaryLight
-                    : AppColors.textTertiaryLight.withOpacity(0.3),
+                    : AppColors.textTertiaryLight.withValues(alpha: 0.3),
                 size: 22),
           ],
         ),
@@ -426,7 +426,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen>
           Container(
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
-              color: AppColors.secondaryPurple.withOpacity(0.1),
+              color: AppColors.secondaryPurple.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(12),
             ),
             child: Icon(icon, color: AppColors.secondaryPurple, size: 22),

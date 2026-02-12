@@ -81,7 +81,7 @@ class _ChallengesScreenState extends ConsumerState<ChallengesScreen>
           controller: _tabController,
           indicatorColor: AppColors.primaryOrange,
           labelColor: AppColors.primaryOrange,
-          unselectedLabelColor: Theme.of(context).colorScheme.onSurface.withOpacity(0.5),
+          unselectedLabelColor: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.5),
           labelStyle: AppTextStyles.labelMedium,
           dividerColor: Colors.transparent,
           tabs: [
@@ -109,7 +109,7 @@ class _ChallengesScreenState extends ConsumerState<ChallengesScreen>
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(Icons.flag_outlined,
-                size: 80, color: Theme.of(context).colorScheme.onSurface.withOpacity(0.5).withOpacity(0.3)),
+                size: 80, color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.5).withValues(alpha: 0.3)),
             const SizedBox(height: 16),
             Text('No active challenges',
                 style: AppTextStyles.headlineSmall
@@ -117,7 +117,7 @@ class _ChallengesScreenState extends ConsumerState<ChallengesScreen>
             const SizedBox(height: 8),
             Text('Join a challenge to get started!',
                 style: AppTextStyles.bodySmall
-                    .copyWith(color: Theme.of(context).colorScheme.onSurface.withOpacity(0.5))),
+                    .copyWith(color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.5))),
             const SizedBox(height: 24),
             ElevatedButton(
               onPressed: _showAvailableChallenges,
@@ -149,7 +149,7 @@ class _ChallengesScreenState extends ConsumerState<ChallengesScreen>
             borderRadius: BorderRadius.circular(20),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.15),
+                color: Colors.black.withValues(alpha: 0.15),
                 blurRadius: 10,
                 offset: const Offset(0, 5),
               ),
@@ -179,7 +179,7 @@ class _ChallengesScreenState extends ConsumerState<ChallengesScreen>
                         padding: const EdgeInsets.symmetric(
                             horizontal: 14, vertical: 8),
                         decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.25),
+                          color: Colors.white.withValues(alpha: 0.25),
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: Text('Complete',
@@ -192,7 +192,7 @@ class _ChallengesScreenState extends ConsumerState<ChallengesScreen>
                       padding: const EdgeInsets.symmetric(
                           horizontal: 14, vertical: 8),
                       decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.25),
+                        color: Colors.white.withValues(alpha: 0.25),
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Row(
@@ -213,7 +213,7 @@ class _ChallengesScreenState extends ConsumerState<ChallengesScreen>
               Text(
                 challenge.description,
                 style: AppTextStyles.bodySmall
-                    .copyWith(color: Colors.white.withOpacity(0.85)),
+                    .copyWith(color: Colors.white.withValues(alpha: 0.85)),
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
               ),
@@ -221,12 +221,12 @@ class _ChallengesScreenState extends ConsumerState<ChallengesScreen>
               Row(
                 children: [
                   Icon(Icons.calendar_today,
-                      color: Colors.white.withOpacity(0.9), size: 14),
+                      color: Colors.white.withValues(alpha: 0.9), size: 14),
                   const SizedBox(width: 4),
                   Text(
                     '${challenge.completedDays}/${challenge.totalDays} days',
                     style: AppTextStyles.bodySmall
-                        .copyWith(color: Colors.white.withOpacity(0.9)),
+                        .copyWith(color: Colors.white.withValues(alpha: 0.9)),
                   ),
                   const SizedBox(width: 16),
                   if (challenge.currentStreak > 0) ...[
@@ -236,7 +236,7 @@ class _ChallengesScreenState extends ConsumerState<ChallengesScreen>
                     Text(
                       '${challenge.currentStreak} day streak',
                       style: AppTextStyles.bodySmall
-                          .copyWith(color: Colors.white.withOpacity(0.9)),
+                          .copyWith(color: Colors.white.withValues(alpha: 0.9)),
                     ),
                   ],
                 ],
@@ -246,7 +246,7 @@ class _ChallengesScreenState extends ConsumerState<ChallengesScreen>
                 borderRadius: BorderRadius.circular(4),
                 child: LinearProgressIndicator(
                   value: challenge.progress,
-                  backgroundColor: Colors.white.withOpacity(0.2),
+                  backgroundColor: Colors.white.withValues(alpha: 0.2),
                   valueColor:
                       const AlwaysStoppedAnimation<Color>(Colors.white),
                   minHeight: 6,
@@ -266,7 +266,7 @@ class _ChallengesScreenState extends ConsumerState<ChallengesScreen>
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(Icons.emoji_events,
-                size: 80, color: Theme.of(context).colorScheme.onSurface.withOpacity(0.5).withOpacity(0.3)),
+                size: 80, color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.5).withValues(alpha: 0.3)),
             const SizedBox(height: 16),
             Text('No completed challenges yet',
                 style: AppTextStyles.headlineSmall
@@ -285,10 +285,10 @@ class _ChallengesScreenState extends ConsumerState<ChallengesScreen>
           margin: const EdgeInsets.only(bottom: 12),
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-            color: AppColors.secondaryGreen.withOpacity(0.1),
+            color: AppColors.secondaryGreen.withValues(alpha: 0.1),
             borderRadius: BorderRadius.circular(16),
             border:
-                Border.all(color: AppColors.secondaryGreen.withOpacity(0.3)),
+                Border.all(color: AppColors.secondaryGreen.withValues(alpha: 0.3)),
           ),
           child: Row(
             children: [
@@ -303,7 +303,7 @@ class _ChallengesScreenState extends ConsumerState<ChallengesScreen>
                             .copyWith(color: Theme.of(context).colorScheme.onSurface)),
                     Text('${challenge.totalDays} days completed',
                         style: AppTextStyles.bodySmall
-                            .copyWith(color: Theme.of(context).colorScheme.onSurface.withOpacity(0.5))),
+                            .copyWith(color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.5))),
                   ],
                 ),
               ),
@@ -389,7 +389,7 @@ class _ChallengesScreenState extends ConsumerState<ChallengesScreen>
                               Text(
                                 template.description,
                                 style: AppTextStyles.bodySmall.copyWith(
-                                    color: Colors.white.withOpacity(0.85)),
+                                    color: Colors.white.withValues(alpha: 0.85)),
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
                               ),
@@ -399,7 +399,7 @@ class _ChallengesScreenState extends ConsumerState<ChallengesScreen>
                                   Text('${template.totalDays} days',
                                       style: AppTextStyles.bodySmall.copyWith(
                                           color:
-                                              Colors.white.withOpacity(0.8))),
+                                              Colors.white.withValues(alpha: 0.8))),
                                   const Spacer(),
                                   GestureDetector(
                                     onTap: isJoined
@@ -429,7 +429,7 @@ class _ChallengesScreenState extends ConsumerState<ChallengesScreen>
                                           horizontal: 16, vertical: 8),
                                       decoration: BoxDecoration(
                                         color: isJoined
-                                            ? Colors.white.withOpacity(0.2)
+                                            ? Colors.white.withValues(alpha: 0.2)
                                             : Colors.white,
                                         borderRadius:
                                             BorderRadius.circular(12),

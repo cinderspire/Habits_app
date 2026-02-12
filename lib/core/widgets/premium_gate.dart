@@ -40,7 +40,7 @@ class PremiumGate extends ConsumerWidget {
             ),
             child: Container(
               decoration: BoxDecoration(
-                color: Colors.black.withOpacity(0.05),
+                color: Colors.black.withValues(alpha: 0.05),
                 borderRadius: BorderRadius.circular(16),
               ),
               child: Center(
@@ -48,11 +48,11 @@ class PremiumGate extends ConsumerWidget {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
                   decoration: BoxDecoration(
-                    color: AppColors.primaryOrange.withOpacity(0.9),
+                    color: AppColors.primaryOrange.withValues(alpha: 0.9),
                     borderRadius: BorderRadius.circular(24),
                     boxShadow: [
                       BoxShadow(
-                        color: AppColors.primaryOrange.withOpacity(0.3),
+                        color: AppColors.primaryOrange.withValues(alpha: 0.3),
                         blurRadius: 12,
                         offset: const Offset(0, 4),
                       ),

@@ -103,7 +103,7 @@ class _HabitDetailScreenState extends ConsumerState<HabitDetailScreen>
         background: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
-              colors: [color, color.withOpacity(0.7)],
+              colors: [color, color.withValues(alpha: 0.7)],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
@@ -116,7 +116,7 @@ class _HabitDetailScreenState extends ConsumerState<HabitDetailScreen>
                 Container(
                   padding: const EdgeInsets.all(20),
                   decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.2),
+                    color: Colors.white.withValues(alpha: 0.2),
                     shape: BoxShape.circle,
                   ),
                   child: Text(habit.icon, style: const TextStyle(fontSize: 48)),
@@ -138,7 +138,7 @@ class _HabitDetailScreenState extends ConsumerState<HabitDetailScreen>
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                         decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.2),
+                          color: Colors.white.withValues(alpha: 0.2),
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: Row(
@@ -187,7 +187,7 @@ class _HabitDetailScreenState extends ConsumerState<HabitDetailScreen>
           borderRadius: BorderRadius.circular(16),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.04),
+              color: Colors.black.withValues(alpha: 0.04),
               blurRadius: 8,
               offset: const Offset(0, 2),
             ),
@@ -234,7 +234,7 @@ class _HabitDetailScreenState extends ConsumerState<HabitDetailScreen>
           borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.04),
+              color: Colors.black.withValues(alpha: 0.04),
               blurRadius: 8,
               offset: const Offset(0, 2),
             ),
@@ -252,7 +252,7 @@ class _HabitDetailScreenState extends ConsumerState<HabitDetailScreen>
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                   decoration: BoxDecoration(
-                    color: color.withOpacity(0.1),
+                    color: color.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Text(
@@ -286,9 +286,9 @@ class _HabitDetailScreenState extends ConsumerState<HabitDetailScreen>
 
                 Color cellColor;
                 if (isCompleted) {
-                  cellColor = color.withOpacity(0.85);
+                  cellColor = color.withValues(alpha: 0.85);
                 } else if (isFrozen) {
-                  cellColor = AppColors.streakIce.withOpacity(0.5);
+                  cellColor = AppColors.streakIce.withValues(alpha: 0.5);
                 } else {
                   cellColor = AppColors.backgroundLightElevated;
                 }
@@ -319,9 +319,9 @@ class _HabitDetailScreenState extends ConsumerState<HabitDetailScreen>
               children: [
                 _build30DayLegend(AppColors.backgroundLightElevated, 'Missed'),
                 const SizedBox(width: 12),
-                _build30DayLegend(color.withOpacity(0.85), 'Done'),
+                _build30DayLegend(color.withValues(alpha: 0.85), 'Done'),
                 const SizedBox(width: 12),
-                _build30DayLegend(AppColors.streakIce.withOpacity(0.5), 'Frozen'),
+                _build30DayLegend(AppColors.streakIce.withValues(alpha: 0.5), 'Frozen'),
               ],
             ),
           ],
@@ -366,7 +366,7 @@ class _HabitDetailScreenState extends ConsumerState<HabitDetailScreen>
           borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.04),
+              color: Colors.black.withValues(alpha: 0.04),
               blurRadius: 8,
               offset: const Offset(0, 2),
             ),
@@ -386,7 +386,7 @@ class _HabitDetailScreenState extends ConsumerState<HabitDetailScreen>
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                   decoration: BoxDecoration(
-                    color: strengthColor.withOpacity(0.12),
+                    color: strengthColor.withValues(alpha: 0.12),
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Text(
@@ -435,8 +435,8 @@ class _HabitDetailScreenState extends ConsumerState<HabitDetailScreen>
                     padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                     decoration: BoxDecoration(
                       color: habit.freezeUsedThisWeek
-                          ? AppColors.textTertiaryLight.withOpacity(0.1)
-                          : AppColors.streakIce.withOpacity(0.1),
+                          ? AppColors.textTertiaryLight.withValues(alpha: 0.1)
+                          : AppColors.streakIce.withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Text(
@@ -472,21 +472,21 @@ class _HabitDetailScreenState extends ConsumerState<HabitDetailScreen>
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              AppColors.secondaryPurple.withOpacity(0.08),
-              AppColors.secondaryPurple.withOpacity(0.03),
+              AppColors.secondaryPurple.withValues(alpha: 0.08),
+              AppColors.secondaryPurple.withValues(alpha: 0.03),
             ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
           borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: AppColors.secondaryPurple.withOpacity(0.2)),
+          border: Border.all(color: AppColors.secondaryPurple.withValues(alpha: 0.2)),
         ),
         child: Row(
           children: [
             Container(
               padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
-                color: AppColors.secondaryPurple.withOpacity(0.15),
+                color: AppColors.secondaryPurple.withValues(alpha: 0.15),
                 shape: BoxShape.circle,
               ),
               child: const Icon(Icons.schedule_rounded,
@@ -538,7 +538,7 @@ class _HabitDetailScreenState extends ConsumerState<HabitDetailScreen>
           borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.04),
+              color: Colors.black.withValues(alpha: 0.04),
               blurRadius: 8,
               offset: const Offset(0, 2),
             ),
@@ -617,11 +617,11 @@ class _HabitDetailScreenState extends ConsumerState<HabitDetailScreen>
                 return Container(
                   decoration: BoxDecoration(
                     color: isCompleted
-                        ? color.withOpacity(0.85)
+                        ? color.withValues(alpha: 0.85)
                         : isFrozen
-                            ? AppColors.streakIce.withOpacity(0.4)
+                            ? AppColors.streakIce.withValues(alpha: 0.4)
                             : isToday
-                                ? color.withOpacity(0.15)
+                                ? color.withValues(alpha: 0.15)
                                 : Colors.transparent,
                     borderRadius: BorderRadius.circular(8),
                     border: isToday && !isCompleted && !isFrozen
@@ -638,7 +638,7 @@ class _HabitDetailScreenState extends ConsumerState<HabitDetailScreen>
                               color: isCompleted
                                   ? Colors.white
                                   : isFuture
-                                      ? AppColors.textTertiaryLight.withOpacity(0.4)
+                                      ? AppColors.textTertiaryLight.withValues(alpha: 0.4)
                                       : AppColors.textSecondaryLight,
                               fontWeight: isToday ? FontWeight.bold : FontWeight.normal,
                             ),
@@ -652,9 +652,9 @@ class _HabitDetailScreenState extends ConsumerState<HabitDetailScreen>
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                _buildLegendItem(color.withOpacity(0.85), 'Completed'),
+                _buildLegendItem(color.withValues(alpha: 0.85), 'Completed'),
                 const SizedBox(width: 16),
-                _buildLegendItem(AppColors.streakIce.withOpacity(0.4), 'Frozen'),
+                _buildLegendItem(AppColors.streakIce.withValues(alpha: 0.4), 'Frozen'),
               ],
             ),
           ],
@@ -701,19 +701,19 @@ class _HabitDetailScreenState extends ConsumerState<HabitDetailScreen>
         padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [color.withOpacity(0.1), color.withOpacity(0.05)],
+            colors: [color.withValues(alpha: 0.1), color.withValues(alpha: 0.05)],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
           borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: color.withOpacity(0.3)),
+          border: Border.all(color: color.withValues(alpha: 0.3)),
         ),
         child: Row(
           children: [
             Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: color.withOpacity(0.15),
+                color: color.withValues(alpha: 0.15),
                 shape: BoxShape.circle,
               ),
               child: Icon(Icons.local_fire_department_rounded, color: color, size: 28),
@@ -796,7 +796,7 @@ class _HabitDetailScreenState extends ConsumerState<HabitDetailScreen>
                       boxShadow: isCompleted
                           ? [
                               BoxShadow(
-                                color: color.withOpacity(0.3),
+                                color: color.withValues(alpha: 0.3),
                                 blurRadius: 8,
                                 offset: const Offset(0, 2),
                               ),
@@ -859,7 +859,7 @@ class _HabitDetailScreenState extends ConsumerState<HabitDetailScreen>
                     ? []
                     : [
                         BoxShadow(
-                          color: AppColors.primaryOrange.withOpacity(0.3),
+                          color: AppColors.primaryOrange.withValues(alpha: 0.3),
                           blurRadius: 12,
                           offset: const Offset(0, 6),
                         ),
@@ -907,7 +907,7 @@ class _HabitDetailScreenState extends ConsumerState<HabitDetailScreen>
                 decoration: BoxDecoration(
                   color: habit.freezeUsedThisWeek
                       ? AppColors.backgroundLightElevated
-                      : AppColors.streakIce.withOpacity(0.1),
+                      : AppColors.streakIce.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(14),
                   border: Border.all(
                     color: habit.freezeUsedThisWeek
@@ -945,9 +945,9 @@ class _HabitDetailScreenState extends ConsumerState<HabitDetailScreen>
               width: double.infinity,
               padding: const EdgeInsets.symmetric(vertical: 14),
               decoration: BoxDecoration(
-                color: AppColors.streakIce.withOpacity(0.08),
+                color: AppColors.streakIce.withValues(alpha: 0.08),
                 borderRadius: BorderRadius.circular(14),
-                border: Border.all(color: AppColors.streakIce.withOpacity(0.3)),
+                border: Border.all(color: AppColors.streakIce.withValues(alpha: 0.3)),
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -1047,7 +1047,7 @@ class _HabitDetailScreenState extends ConsumerState<HabitDetailScreen>
                         height: 40,
                         decoration: BoxDecoration(
                           color: isSelected
-                              ? Color(selectedColor).withOpacity(0.15)
+                              ? Color(selectedColor).withValues(alpha: 0.15)
                               : AppColors.backgroundLightElevated,
                           borderRadius: BorderRadius.circular(10),
                           border: isSelected
@@ -1145,7 +1145,7 @@ class _HabitDetailScreenState extends ConsumerState<HabitDetailScreen>
           padding: const EdgeInsets.symmetric(vertical: 12),
           decoration: BoxDecoration(
             color: isSelected
-                ? AppColors.primaryOrange.withOpacity(0.1)
+                ? AppColors.primaryOrange.withValues(alpha: 0.1)
                 : AppColors.backgroundLight,
             borderRadius: BorderRadius.circular(12),
             border: Border.all(

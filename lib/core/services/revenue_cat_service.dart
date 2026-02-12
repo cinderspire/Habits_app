@@ -38,6 +38,9 @@ class RevenueCatService {
   RevenueCatService._();
 
   bool _initialized = false;
+  bool _demoMode = false;
+
+  bool get isDemoMode => _demoMode;
 
   Future<void> initialize() async {
     if (_initialized) return;
@@ -48,7 +51,8 @@ class RevenueCatService {
           : RevenueCatConfig.googleApiKey;
 
       if (apiKey.contains('YOUR_') || apiKey.contains('REPLACE') || apiKey.isEmpty) {
-        debugPrint('[RevenueCat] Skipping — placeholder API key');
+        debugPrint('[RevenueCat] Skipping — placeholder API key (demo mode)');
+        _demoMode = true;
         return;
       }
 
@@ -69,6 +73,7 @@ class RevenueCatService {
   }
 
   Future<SubscriptionStatus> getSubscriptionStatus() async {
+    if (_demoMode) return const SubscriptionStatus(isPremium: true);
     if (!_initialized) return SubscriptionStatus.free;
 
     try {

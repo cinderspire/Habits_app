@@ -64,7 +64,7 @@ class WeeklyReviewScreen extends ConsumerWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(Icons.analytics_outlined,
-                size: 56, color: AppColors.textTertiaryLight.withOpacity(0.5)),
+                size: 56, color: AppColors.textTertiaryLight.withValues(alpha: 0.5)),
             const SizedBox(height: 16),
             Text(
               'No data for review',
@@ -104,15 +104,15 @@ class WeeklyReviewScreen extends ConsumerWidget {
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            AppColors.secondaryPurple.withOpacity(0.1),
-            AppColors.secondaryBlue.withOpacity(0.05),
+            AppColors.secondaryPurple.withValues(alpha: 0.1),
+            AppColors.secondaryBlue.withValues(alpha: 0.05),
           ],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
         borderRadius: BorderRadius.circular(24),
         border: Border.all(
-            color: AppColors.secondaryPurple.withOpacity(0.2)),
+            color: AppColors.secondaryPurple.withValues(alpha: 0.2)),
       ),
       child: Column(
         children: [
@@ -151,7 +151,7 @@ class WeeklyReviewScreen extends ConsumerWidget {
         Container(
           padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(
-            color: color.withOpacity(0.12),
+            color: color.withValues(alpha: 0.12),
             shape: BoxShape.circle,
           ),
           child: Text(value,
@@ -177,7 +177,7 @@ class WeeklyReviewScreen extends ConsumerWidget {
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.04),
+            color: Colors.black.withValues(alpha: 0.04),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -207,9 +207,9 @@ class WeeklyReviewScreen extends ConsumerWidget {
                     height: 36,
                     decoration: BoxDecoration(
                       color: isToday
-                          ? AppColors.primaryOrange.withOpacity(0.15)
+                          ? AppColors.primaryOrange.withValues(alpha: 0.15)
                           : AppColors.secondaryGreen
-                              .withOpacity(0.05 + rate * 0.3),
+                              .withValues(alpha: 0.05 + rate * 0.3),
                       shape: BoxShape.circle,
                       border: isToday
                           ? Border.all(
@@ -286,7 +286,7 @@ class WeeklyReviewScreen extends ConsumerWidget {
         borderRadius: BorderRadius.circular(18),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.04),
+            color: Colors.black.withValues(alpha: 0.04),
             blurRadius: 8,
             offset: const Offset(0, 2),
           ),
@@ -309,7 +309,7 @@ class WeeklyReviewScreen extends ConsumerWidget {
               Container(
                 padding: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
-                  color: Color(habit.color).withOpacity(0.12),
+                  color: Color(habit.color).withValues(alpha: 0.12),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Text(habit.icon, style: const TextStyle(fontSize: 22)),
@@ -348,7 +348,7 @@ class WeeklyReviewScreen extends ConsumerWidget {
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.04),
+            color: Colors.black.withValues(alpha: 0.04),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -433,7 +433,7 @@ class WeeklyReviewScreen extends ConsumerWidget {
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.04),
+            color: Colors.black.withValues(alpha: 0.04),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -466,7 +466,7 @@ class WeeklyReviewScreen extends ConsumerWidget {
                     Container(
                       padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
-                        color: Color(h.color).withOpacity(0.12),
+                        color: Color(h.color).withValues(alpha: 0.12),
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child:
@@ -504,14 +504,14 @@ class WeeklyReviewScreen extends ConsumerWidget {
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            AppColors.primaryOrange.withOpacity(0.06),
-            AppColors.primaryYellow.withOpacity(0.03),
+            AppColors.primaryOrange.withValues(alpha: 0.06),
+            AppColors.primaryYellow.withValues(alpha: 0.03),
           ],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: AppColors.primaryOrange.withOpacity(0.2)),
+        border: Border.all(color: AppColors.primaryOrange.withValues(alpha: 0.2)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

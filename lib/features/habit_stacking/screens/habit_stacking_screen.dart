@@ -90,21 +90,21 @@ class _HabitStackingScreenState extends ConsumerState<HabitStackingScreen> {
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              AppColors.secondaryBlue.withOpacity(0.08),
-              AppColors.secondaryPurple.withOpacity(0.05),
+              AppColors.secondaryBlue.withValues(alpha: 0.08),
+              AppColors.secondaryPurple.withValues(alpha: 0.05),
             ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
           borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: AppColors.secondaryBlue.withOpacity(0.2)),
+          border: Border.all(color: AppColors.secondaryBlue.withValues(alpha: 0.2)),
         ),
         child: Row(
           children: [
             Container(
               padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
-                color: AppColors.secondaryBlue.withOpacity(0.15),
+                color: AppColors.secondaryBlue.withValues(alpha: 0.15),
                 shape: BoxShape.circle,
               ),
               child: const Icon(Icons.link_rounded,
@@ -179,7 +179,7 @@ class _HabitStackingScreenState extends ConsumerState<HabitStackingScreen> {
                     const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                 decoration: BoxDecoration(
                   color: isSelected
-                      ? AppColors.secondaryBlue.withOpacity(0.08)
+                      ? AppColors.secondaryBlue.withValues(alpha: 0.08)
                       : AppColors.backgroundLightCard,
                   borderRadius: BorderRadius.circular(14),
                   border: Border.all(
@@ -211,7 +211,7 @@ class _HabitStackingScreenState extends ConsumerState<HabitStackingScreen> {
                     Container(
                       padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
-                        color: Color(habit.color).withOpacity(0.12),
+                        color: Color(habit.color).withValues(alpha: 0.12),
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: Text(habit.icon,
@@ -251,7 +251,7 @@ class _HabitStackingScreenState extends ConsumerState<HabitStackingScreen> {
                 color: AppColors.backgroundLightCard,
                 borderRadius: BorderRadius.circular(14),
                 border:
-                    Border.all(color: AppColors.secondaryBlue.withOpacity(0.3)),
+                    Border.all(color: AppColors.secondaryBlue.withValues(alpha: 0.3)),
               ),
               child: Row(
                 children: _selectedForStack.asMap().entries.map((entry) {
@@ -284,7 +284,7 @@ class _HabitStackingScreenState extends ConsumerState<HabitStackingScreen> {
                   borderRadius: BorderRadius.circular(14),
                   boxShadow: [
                     BoxShadow(
-                      color: AppColors.secondaryBlue.withOpacity(0.3),
+                      color: AppColors.secondaryBlue.withValues(alpha: 0.3),
                       blurRadius: 12,
                       offset: const Offset(0, 6),
                     ),
@@ -329,17 +329,17 @@ class _HabitStackingScreenState extends ConsumerState<HabitStackingScreen> {
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
                 color: allDone
-                    ? AppColors.secondaryGreen.withOpacity(0.06)
+                    ? AppColors.secondaryGreen.withValues(alpha: 0.06)
                     : AppColors.backgroundLightCard,
                 borderRadius: BorderRadius.circular(18),
                 border: Border.all(
                   color: allDone
-                      ? AppColors.secondaryGreen.withOpacity(0.3)
+                      ? AppColors.secondaryGreen.withValues(alpha: 0.3)
                       : AppColors.glassBorder,
                 ),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.04),
+                    color: Colors.black.withValues(alpha: 0.04),
                     blurRadius: 8,
                     offset: const Offset(0, 2),
                   ),
@@ -366,7 +366,7 @@ class _HabitStackingScreenState extends ConsumerState<HabitStackingScreen> {
                                       height: 44,
                                       decoration: BoxDecoration(
                                         color: done
-                                            ? Color(h.color).withOpacity(0.2)
+                                            ? Color(h.color).withValues(alpha: 0.2)
                                             : AppColors.backgroundLightElevated,
                                         shape: BoxShape.circle,
                                         border: done
@@ -408,7 +408,7 @@ class _HabitStackingScreenState extends ConsumerState<HabitStackingScreen> {
                                     color: done
                                         ? AppColors.secondaryGreen
                                         : AppColors.textTertiaryLight
-                                            .withOpacity(0.4),
+                                            .withValues(alpha: 0.4),
                                   ),
                                 ),
                             ],
@@ -509,7 +509,7 @@ class _HabitStackingScreenState extends ConsumerState<HabitStackingScreen> {
       child: Column(
         children: [
           Icon(Icons.link_off_rounded,
-              size: 48, color: AppColors.textTertiaryLight.withOpacity(0.5)),
+              size: 48, color: AppColors.textTertiaryLight.withValues(alpha: 0.5)),
           const SizedBox(height: 16),
           Text(
             'No habits to chain yet',

@@ -157,7 +157,7 @@ class _StatisticsScreenState extends ConsumerState<StatisticsScreen>
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.04),
+            color: Colors.black.withValues(alpha: 0.04),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -169,7 +169,7 @@ class _StatisticsScreenState extends ConsumerState<StatisticsScreen>
           Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-              color: color.withOpacity(0.12),
+              color: color.withValues(alpha: 0.12),
               borderRadius: BorderRadius.circular(10),
             ),
             child: Icon(icon, color: color, size: 22),
@@ -219,7 +219,7 @@ class _StatisticsScreenState extends ConsumerState<StatisticsScreen>
           boxShadow: isSelected
               ? [
                   BoxShadow(
-                    color: AppColors.primaryOrange.withOpacity(0.3),
+                    color: AppColors.primaryOrange.withValues(alpha: 0.3),
                     blurRadius: 8,
                     offset: const Offset(0, 2),
                   ),
@@ -270,7 +270,7 @@ class _StatisticsScreenState extends ConsumerState<StatisticsScreen>
           borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.04),
+              color: Colors.black.withValues(alpha: 0.04),
               blurRadius: 10,
               offset: const Offset(0, 4),
             ),
@@ -353,7 +353,7 @@ class _StatisticsScreenState extends ConsumerState<StatisticsScreen>
                           gradient: LinearGradient(
                             colors: [
                               AppColors.primaryOrange,
-                              AppColors.primaryOrange.withOpacity(0.7),
+                              AppColors.primaryOrange.withValues(alpha: 0.7),
                             ],
                             begin: Alignment.topCenter,
                             end: Alignment.bottomCenter,
@@ -438,7 +438,7 @@ class _StatisticsScreenState extends ConsumerState<StatisticsScreen>
                 borderRadius: BorderRadius.circular(16),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.03),
+                    color: Colors.black.withValues(alpha: 0.03),
                     blurRadius: 8,
                     offset: const Offset(0, 2),
                   ),
@@ -449,7 +449,7 @@ class _StatisticsScreenState extends ConsumerState<StatisticsScreen>
                   Container(
                     padding: const EdgeInsets.all(10),
                     decoration: BoxDecoration(
-                      color: color.withOpacity(0.12),
+                      color: color.withValues(alpha: 0.12),
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Text(habit.icon, style: const TextStyle(fontSize: 22)),
@@ -515,7 +515,7 @@ class _StatisticsScreenState extends ConsumerState<StatisticsScreen>
               borderRadius: BorderRadius.circular(20),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.04),
+                  color: Colors.black.withValues(alpha: 0.04),
                   blurRadius: 10,
                   offset: const Offset(0, 4),
                 ),
@@ -547,7 +547,7 @@ class _StatisticsScreenState extends ConsumerState<StatisticsScreen>
                       Container(
                         padding: const EdgeInsets.all(8),
                         decoration: BoxDecoration(
-                          color: color.withOpacity(0.12),
+                          color: color.withValues(alpha: 0.12),
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: Text(habit.icon, style: const TextStyle(fontSize: 18)),
@@ -562,7 +562,7 @@ class _StatisticsScreenState extends ConsumerState<StatisticsScreen>
                         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                         decoration: BoxDecoration(
                           color: habit.currentStreak > 0
-                              ? AppColors.primaryOrange.withOpacity(0.1)
+                              ? AppColors.primaryOrange.withValues(alpha: 0.1)
                               : AppColors.backgroundLightElevated,
                           borderRadius: BorderRadius.circular(20),
                         ),

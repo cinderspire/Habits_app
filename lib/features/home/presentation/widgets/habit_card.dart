@@ -39,9 +39,9 @@ class HabitCard extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           color: isFrozen
-              ? AppColors.streakIce.withOpacity(0.08)
+              ? AppColors.streakIce.withValues(alpha: 0.08)
               : isCompleted
-                  ? color.withOpacity(0.1)
+                  ? color.withValues(alpha: 0.1)
                   : AppColors.backgroundLightCard,
           borderRadius: BorderRadius.circular(16),
           border: Border.all(
@@ -55,10 +55,10 @@ class HabitCard extends StatelessWidget {
           boxShadow: [
             BoxShadow(
               color: isCompleted
-                  ? color.withOpacity(0.2)
+                  ? color.withValues(alpha: 0.2)
                   : isFrozen
-                      ? AppColors.streakIce.withOpacity(0.15)
-                      : Colors.black.withOpacity(0.05),
+                      ? AppColors.streakIce.withValues(alpha: 0.15)
+                      : Colors.black.withValues(alpha: 0.05),
               blurRadius: 10,
               offset: const Offset(0, 4),
             ),
@@ -112,7 +112,7 @@ class HabitCard extends StatelessWidget {
                   padding: const EdgeInsets.all(10),
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
-                      colors: [color.withOpacity(0.18), color.withOpacity(0.08)],
+                      colors: [color.withValues(alpha: 0.18), color.withValues(alpha: 0.08)],
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
                     ),
@@ -159,7 +159,7 @@ class HabitCard extends StatelessWidget {
                             Icon(
                               Icons.schedule_rounded,
                               size: 13,
-                              color: AppColors.secondaryPurple.withOpacity(0.6),
+                              color: AppColors.secondaryPurple.withValues(alpha: 0.6),
                             ),
                           ],
                           if (habit.stackGroupId != null) ...[
@@ -167,7 +167,7 @@ class HabitCard extends StatelessWidget {
                             Icon(
                               Icons.link_rounded,
                               size: 14,
-                              color: AppColors.secondaryBlue.withOpacity(0.6),
+                              color: AppColors.secondaryBlue.withValues(alpha: 0.6),
                             ),
                           ],
                           if (isFrozen) ...[
@@ -176,7 +176,7 @@ class HabitCard extends StatelessWidget {
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 6, vertical: 2),
                               decoration: BoxDecoration(
-                                color: AppColors.streakIce.withOpacity(0.15),
+                                color: AppColors.streakIce.withValues(alpha: 0.15),
                                 borderRadius: BorderRadius.circular(6),
                               ),
                               child: Text(
@@ -208,7 +208,7 @@ class HabitCard extends StatelessWidget {
                           Icons.ac_unit_rounded,
                           size: 20,
                           color: habit.freezeUsedThisWeek
-                              ? AppColors.textTertiaryLight.withOpacity(0.3)
+                              ? AppColors.textTertiaryLight.withValues(alpha: 0.3)
                               : AppColors.streakIce,
                         ),
                       ),
@@ -277,7 +277,7 @@ class _HabitStrengthBar extends StatelessWidget {
 
     return Row(
       children: [
-        Icon(strengthIcon, size: 14, color: color.withOpacity(0.7)),
+        Icon(strengthIcon, size: 14, color: color.withValues(alpha: 0.7)),
         const SizedBox(width: 6),
         Expanded(
           child: ClipRRect(

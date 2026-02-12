@@ -95,7 +95,7 @@ class _CalendarScreenState extends ConsumerState<CalendarScreen>
                 borderRadius: BorderRadius.circular(10),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.04),
+                    color: Colors.black.withValues(alpha: 0.04),
                     blurRadius: 6,
                     offset: const Offset(0, 2),
                   ),
@@ -126,7 +126,7 @@ class _CalendarScreenState extends ConsumerState<CalendarScreen>
                 borderRadius: BorderRadius.circular(10),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.04),
+                    color: Colors.black.withValues(alpha: 0.04),
                     blurRadius: 6,
                     offset: const Offset(0, 2),
                   ),
@@ -165,7 +165,7 @@ class _CalendarScreenState extends ConsumerState<CalendarScreen>
           borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.04),
+              color: Colors.black.withValues(alpha: 0.04),
               blurRadius: 10,
               offset: const Offset(0, 4),
             ),
@@ -228,9 +228,9 @@ class _CalendarScreenState extends ConsumerState<CalendarScreen>
                       color: isFuture
                           ? Colors.transparent
                           : intensity > 0
-                              ? AppColors.secondaryGreen.withOpacity(0.15 + intensity * 0.65)
+                              ? AppColors.secondaryGreen.withValues(alpha: 0.15 + intensity * 0.65)
                               : isSelected
-                                  ? AppColors.primaryOrange.withOpacity(0.1)
+                                  ? AppColors.primaryOrange.withValues(alpha: 0.1)
                                   : Colors.transparent,
                       borderRadius: BorderRadius.circular(10),
                       border: isToday
@@ -246,7 +246,7 @@ class _CalendarScreenState extends ConsumerState<CalendarScreen>
                           color: intensity > 0.6
                               ? Colors.white
                               : isFuture
-                                  ? AppColors.textTertiaryLight.withOpacity(0.4)
+                                  ? AppColors.textTertiaryLight.withValues(alpha: 0.4)
                                   : isToday
                                       ? AppColors.primaryOrange
                                       : AppColors.textSecondaryLight,
@@ -275,7 +275,7 @@ class _CalendarScreenState extends ConsumerState<CalendarScreen>
                     decoration: BoxDecoration(
                       color: i == 0
                           ? AppColors.backgroundLightElevated
-                          : AppColors.secondaryGreen.withOpacity(opacity),
+                          : AppColors.secondaryGreen.withValues(alpha: opacity),
                       borderRadius: BorderRadius.circular(4),
                     ),
                   );
@@ -314,7 +314,7 @@ class _CalendarScreenState extends ConsumerState<CalendarScreen>
           borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.04),
+              color: Colors.black.withValues(alpha: 0.04),
               blurRadius: 10,
               offset: const Offset(0, 4),
             ),
@@ -328,7 +328,7 @@ class _CalendarScreenState extends ConsumerState<CalendarScreen>
                 Container(
                   padding: const EdgeInsets.all(10),
                   decoration: BoxDecoration(
-                    color: AppColors.primaryOrange.withOpacity(0.1),
+                    color: AppColors.primaryOrange.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: const Icon(Icons.calendar_today_rounded,
@@ -355,7 +355,7 @@ class _CalendarScreenState extends ConsumerState<CalendarScreen>
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                   decoration: BoxDecoration(
-                    color: AppColors.secondaryGreen.withOpacity(0.1),
+                    color: AppColors.secondaryGreen.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Text(
@@ -396,7 +396,7 @@ class _CalendarScreenState extends ConsumerState<CalendarScreen>
             width: 32,
             height: 32,
             decoration: BoxDecoration(
-              color: color.withOpacity(0.12),
+              color: color.withValues(alpha: 0.12),
               borderRadius: BorderRadius.circular(8),
             ),
             child: Center(child: Text(habit.icon, style: const TextStyle(fontSize: 16))),
@@ -410,7 +410,7 @@ class _CalendarScreenState extends ConsumerState<CalendarScreen>
           const Spacer(),
           Icon(
             completed ? Icons.check_circle_rounded : Icons.cancel_rounded,
-            color: completed ? AppColors.secondaryGreen : AppColors.error.withOpacity(0.5),
+            color: completed ? AppColors.secondaryGreen : AppColors.error.withValues(alpha: 0.5),
             size: 20,
           ),
         ],
@@ -476,7 +476,7 @@ class _CalendarScreenState extends ConsumerState<CalendarScreen>
           borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.04),
+              color: Colors.black.withValues(alpha: 0.04),
               blurRadius: 10,
               offset: const Offset(0, 4),
             ),
@@ -511,7 +511,7 @@ class _CalendarScreenState extends ConsumerState<CalendarScreen>
           Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-              color: color.withOpacity(0.1),
+              color: color.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(10),
             ),
             child: Icon(icon, color: color, size: 20),

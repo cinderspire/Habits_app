@@ -150,7 +150,7 @@ class _MainScreenState extends ConsumerState<MainScreen>
                     margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
                     padding: const EdgeInsets.only(right: 24),
                     decoration: BoxDecoration(
-                      color: AppColors.error.withOpacity(0.12),
+                      color: AppColors.error.withValues(alpha: 0.12),
                       borderRadius: BorderRadius.circular(16),
                     ),
                     child: const Icon(Icons.delete_rounded, color: AppColors.error, size: 28),
@@ -226,12 +226,12 @@ class _MainScreenState extends ConsumerState<MainScreen>
         padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 14),
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [color.withOpacity(0.1), color.withOpacity(0.04)],
+            colors: [color.withValues(alpha: 0.1), color.withValues(alpha: 0.04)],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
           borderRadius: BorderRadius.circular(14),
-          border: Border.all(color: color.withOpacity(0.2)),
+          border: Border.all(color: color.withValues(alpha: 0.2)),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -274,12 +274,12 @@ class _MainScreenState extends ConsumerState<MainScreen>
               padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
               decoration: BoxDecoration(
                 color: allDone
-                    ? AppColors.secondaryGreen.withOpacity(0.08)
+                    ? AppColors.secondaryGreen.withValues(alpha: 0.08)
                     : AppColors.backgroundLightCard,
                 borderRadius: BorderRadius.circular(12),
                 border: Border.all(
                   color: allDone
-                      ? AppColors.secondaryGreen.withOpacity(0.3)
+                      ? AppColors.secondaryGreen.withValues(alpha: 0.3)
                       : AppColors.glassBorder,
                 ),
               ),
@@ -296,12 +296,12 @@ class _MainScreenState extends ConsumerState<MainScreen>
                           padding: const EdgeInsets.all(6),
                           decoration: BoxDecoration(
                             color: done
-                                ? Color(h.color).withOpacity(0.2)
+                                ? Color(h.color).withValues(alpha: 0.2)
                                 : AppColors.backgroundLightElevated,
                             borderRadius: BorderRadius.circular(8),
                             border: done
                                 ? Border.all(
-                                    color: Color(h.color).withOpacity(0.5))
+                                    color: Color(h.color).withValues(alpha: 0.5))
                                 : null,
                           ),
                           child: Text(h.icon,
@@ -348,7 +348,7 @@ class _MainScreenState extends ConsumerState<MainScreen>
               width: 80,
               height: 80,
               decoration: BoxDecoration(
-                color: AppColors.primaryOrange.withOpacity(0.1),
+                color: AppColors.primaryOrange.withValues(alpha: 0.1),
                 shape: BoxShape.circle,
               ),
               child: const Icon(Icons.add_task_rounded,
@@ -395,7 +395,7 @@ class _MainScreenState extends ConsumerState<MainScreen>
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            AppColors.primaryOrange.withOpacity(0.04),
+            AppColors.primaryOrange.withValues(alpha: 0.04),
             Colors.transparent,
           ],
           begin: Alignment.topCenter,
@@ -439,9 +439,9 @@ class _MainScreenState extends ConsumerState<MainScreen>
             width: double.infinity,
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
             decoration: BoxDecoration(
-              color: AppColors.primaryOrange.withOpacity(0.08),
+              color: AppColors.primaryOrange.withValues(alpha: 0.08),
               borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: AppColors.primaryOrange.withOpacity(0.15)),
+              border: Border.all(color: AppColors.primaryOrange.withValues(alpha: 0.15)),
             ),
             child: Row(
               children: [
@@ -528,7 +528,7 @@ class _MainScreenState extends ConsumerState<MainScreen>
         color: AppColors.backgroundLightCard,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.06),
+            color: Colors.black.withValues(alpha: 0.06),
             blurRadius: 20,
             offset: const Offset(0, -4),
           ),
@@ -563,7 +563,7 @@ class _MainScreenState extends ConsumerState<MainScreen>
           vertical: 8,
         ),
         decoration: BoxDecoration(
-          color: isSelected ? AppColors.primaryOrange.withOpacity(0.1) : Colors.transparent,
+          color: isSelected ? AppColors.primaryOrange.withValues(alpha: 0.1) : Colors.transparent,
           borderRadius: BorderRadius.circular(14),
         ),
         child: Row(
