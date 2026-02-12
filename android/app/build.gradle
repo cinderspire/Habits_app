@@ -29,10 +29,12 @@ if (keystorePropertiesFile.exists()) {
 }
 
 android {
-    namespace "com.habitly.app"
-    compileSdk 34
+    namespace "com.cinderspire.habits"
+    compileSdk 36
+    ndkVersion "28.2.13676358"
 
     compileOptions {
+        coreLibraryDesugaringEnabled true
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
@@ -46,8 +48,8 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.habitly.app"
-        minSdk 21
+        applicationId "com.cinderspire.habits"
+        minSdkVersion flutter.minSdkVersion
         targetSdk 34
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
@@ -76,4 +78,6 @@ flutter {
     source '../..'
 }
 
-dependencies {}
+dependencies {
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.1.4'
+}

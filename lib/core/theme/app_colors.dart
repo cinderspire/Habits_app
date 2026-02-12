@@ -50,19 +50,19 @@ class AppColors {
   static const Color backgroundLightCard = Color(0xFFFFFFFF);
   static const Color backgroundLightElevated = Color(0xFFF1F5F9);
 
-  // Background - Dark Mode
+  // Background - Dark Mode (rich navy, not black)
   static const Color backgroundDark = Color(0xFF0F172A);
   static const Color backgroundDarkCard = Color(0xFF1E293B);
-  static const Color backgroundDarkElevated = Color(0xFF334155);
+  static const Color backgroundDarkElevated = Color(0xFF2D3A4E);
 
   // Text
   static const Color textPrimaryLight = Color(0xFF0F172A);
   static const Color textSecondaryLight = Color(0xFF475569);
   static const Color textTertiaryLight = Color(0xFF94A3B8);
 
-  static const Color textPrimaryDark = Color(0xFFF1F5F9);
-  static const Color textSecondaryDark = Color(0xFFCBD5E1);
-  static const Color textTertiaryDark = Color(0xFF64748B);
+  static const Color textPrimaryDark = Color(0xFFFFFFFF);
+  static const Color textSecondaryDark = Color(0xFFE2E8F0);
+  static const Color textTertiaryDark = Color(0xFF94A3B8);
 
   // Status
   static const Color success = Color(0xFF10B981);
