@@ -52,21 +52,21 @@ class NotificationService {
     required String habitIcon,
     required TimeOfDay time,
   }) async {
-    final androidDetails = AndroidNotificationDetails(
+    const androidDetails = AndroidNotificationDetails(
       'habit_reminders',
       'Habit Reminders',
       channelDescription: 'Daily reminders for your habits',
       importance: Importance.high,
       priority: Priority.high,
       icon: '@mipmap/ic_launcher',
-      color: const Color(0xFFFF6B35),
+      color: Color(0xFFFF6B35),
     );
     const iosDetails = DarwinNotificationDetails(
       presentAlert: true,
       presentBadge: true,
       presentSound: true,
     );
-    final details = NotificationDetails(
+    const details = NotificationDetails(
       android: androidDetails,
       iOS: iosDetails,
     );
@@ -94,21 +94,21 @@ class NotificationService {
     required String title,
     required String body,
   }) async {
-    final androidDetails = AndroidNotificationDetails(
+    const androidDetails = AndroidNotificationDetails(
       'habit_achievements',
       'Achievements',
       channelDescription: 'Habit achievements and milestones',
       importance: Importance.high,
       priority: Priority.high,
       icon: '@mipmap/ic_launcher',
-      color: const Color(0xFFFF6B35),
+      color: Color(0xFFFF6B35),
     );
     const iosDetails = DarwinNotificationDetails(
       presentAlert: true,
       presentBadge: true,
       presentSound: true,
     );
-    final details = NotificationDetails(
+    const details = NotificationDetails(
       android: androidDetails,
       iOS: iosDetails,
     );

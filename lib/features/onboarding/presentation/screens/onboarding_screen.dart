@@ -74,7 +74,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 padding: const EdgeInsets.all(16),
                 child: TextButton(
                   onPressed: _completeOnboarding,
-                  child: Text(
+                  child: const Text(
                     'Skip',
                     style: TextStyle(
                       color: AppColors.textSecondaryLight,

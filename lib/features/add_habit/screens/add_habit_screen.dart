@@ -20,7 +20,7 @@ class _AddHabitScreenState extends ConsumerState<AddHabitScreen> {
   String _selectedIcon = AppConstants.habitIcons[0];
   int _selectedColor = AppConstants.habitColors[0];
   String _selectedFrequency = 'daily';
-  List<int> _selectedCustomDays = [];
+  final List<int> _selectedCustomDays = [];
   TimeOfDay? _reminderTime;
   int _targetPerDay = 1;
 
@@ -482,7 +482,7 @@ class _AddHabitScreenState extends ConsumerState<AddHabitScreen> {
       ),
       child: Row(
         children: [
-          Icon(Icons.repeat_rounded,
+          const Icon(Icons.repeat_rounded,
               color: AppColors.textTertiaryLight, size: 22),
           const SizedBox(width: 12),
           Expanded(

@@ -256,7 +256,7 @@ class _MainScreenState extends ConsumerState<MainScreen>
         children: [
           Row(
             children: [
-              Icon(Icons.link_rounded,
+              const Icon(Icons.link_rounded,
                   size: 18, color: AppColors.secondaryBlue),
               const SizedBox(width: 6),
               Text('Habit Chains',
@@ -310,8 +310,8 @@ class _MainScreenState extends ConsumerState<MainScreen>
                                   color: done ? null : Colors.grey)),
                         ),
                         if (i < stackHabits.length - 1)
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 4),
+                          const Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 4),
                             child: Icon(Icons.arrow_forward_rounded,
                                 size: 14,
                                 color: AppColors.textTertiaryLight),
@@ -321,7 +321,7 @@ class _MainScreenState extends ConsumerState<MainScreen>
                   }),
                   const Spacer(),
                   if (allDone)
-                    Icon(Icons.check_circle_rounded,
+                    const Icon(Icons.check_circle_rounded,
                         size: 20, color: AppColors.secondaryGreen),
                 ],
               ),

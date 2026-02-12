@@ -263,8 +263,8 @@ class _HabitStackingScreenState extends ConsumerState<HabitStackingScreen> {
                     children: [
                       Text(habit.icon, style: const TextStyle(fontSize: 22)),
                       if (i < _selectedForStack.length - 1)
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 6),
+                        const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 6),
                           child: Icon(Icons.arrow_forward_rounded,
                               size: 18, color: AppColors.secondaryBlue),
                         ),
@@ -448,7 +448,7 @@ class _HabitStackingScreenState extends ConsumerState<HabitStackingScreen> {
                       const SizedBox(width: 8),
                       GestureDetector(
                         onTap: () => _dissolveStack(groupId),
-                        child: Icon(Icons.link_off_rounded,
+                        child: const Icon(Icons.link_off_rounded,
                             size: 20,
                             color: AppColors.textTertiaryLight),
                       ),

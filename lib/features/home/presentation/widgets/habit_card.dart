@@ -142,7 +142,7 @@ class HabitCard extends StatelessWidget {
                       const SizedBox(height: 4),
                       Row(
                         children: [
-                          Icon(
+                          const Icon(
                             Icons.repeat_rounded,
                             size: 14,
                             color: AppColors.textTertiaryLight,

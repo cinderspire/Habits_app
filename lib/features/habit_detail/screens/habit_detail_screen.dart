@@ -304,7 +304,7 @@ class _HabitDetailScreenState extends ConsumerState<HabitDetailScreen>
                           : null,
                     ),
                     child: isCompleted
-                        ? Center(
+                        ? const Center(
                             child: Icon(Icons.check_rounded,
                                 color: Colors.white, size: 10))
                         : null,
@@ -422,7 +422,7 @@ class _HabitDetailScreenState extends ConsumerState<HabitDetailScreen>
               const SizedBox(height: 12),
               Row(
                 children: [
-                  Icon(Icons.ac_unit_rounded,
+                  const Icon(Icons.ac_unit_rounded,
                       size: 16, color: AppColors.streakIce),
                   const SizedBox(width: 6),
                   Text(
@@ -1020,11 +1020,11 @@ class _HabitDetailScreenState extends ConsumerState<HabitDetailScreen>
                     fillColor: AppColors.backgroundLight,
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(14),
-                      borderSide: BorderSide(color: AppColors.glassBorder),
+                      borderSide: const BorderSide(color: AppColors.glassBorder),
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(14),
-                      borderSide: BorderSide(color: AppColors.glassBorder),
+                      borderSide: const BorderSide(color: AppColors.glassBorder),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(14),

@@ -336,7 +336,7 @@ class _StatisticsScreenState extends ConsumerState<StatisticsScreen>
                     show: true,
                     drawVerticalLine: false,
                     horizontalInterval: 50,
-                    getDrawingHorizontalLine: (_) => FlLine(
+                    getDrawingHorizontalLine: (_) => const FlLine(
                       color: AppColors.backgroundLightElevated,
                       strokeWidth: 1,
                     ),

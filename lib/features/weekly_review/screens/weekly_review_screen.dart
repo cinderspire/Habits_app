@@ -537,7 +537,7 @@ class WeeklyReviewScreen extends ConsumerWidget {
                     width: 6,
                     height: 6,
                     margin: const EdgeInsets.only(top: 6),
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: AppColors.primaryOrange,
                       shape: BoxShape.circle,
                     ),
